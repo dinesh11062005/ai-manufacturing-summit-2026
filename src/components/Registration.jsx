@@ -185,7 +185,7 @@ function Registration() {
               className="registration-form"
               name="summit-registration"
               method="POST"
-              action="/thank-you/"
+              action="/thank-you"
               data-netlify="true"
               data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
