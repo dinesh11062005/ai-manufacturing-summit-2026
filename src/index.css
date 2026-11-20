@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+/* ==============================
+   AIMS 2026 - GLOBAL DESIGN SYSTEM
+================================ */
+
+:root {
+  font-family: 'Inter', sans-serif;
+
+  color: #ffffff;
+  background: #080e1b;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --color-bg: #080e1b;
+  --color-bg-secondary: #0d1628;
+  --color-card: #111d32;
+
+  --color-primary: #287bff;
+  --color-primary-hover: #1765e8;
+  --color-cyan: #42d6e9;
+
+  --color-white: #ffffff;
+  --color-text-secondary: #a7b2c4;
+  --color-border: rgba(255, 255, 255, 0.09);
+
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --container-width: 1400px;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  --transition: 0.3s ease;
+}
+
+/* ==============================
+   RESET
+================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* ==============================
+   FIXED NAVBAR ANCHOR ALIGNMENT
+================================ */
+
+section[id] {
+  scroll-margin-top: 90px;
+}
+
+/* Registration section needs extra offset */
+
+#registration {
+  scroll-margin-top: 110px;
+}
+
+/* ==============================
+   COMMON ELEMENTS
+================================ */
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ==============================
+   COMMON UTILITIES
+================================ */
+
+.container {
+  width: min(100% - 48px, var(--container-width));
+  margin-inline: auto;
+}
+
+/* Consistent spacing for ALL sections */
+
+.section {
+  padding: 40px 0 80px;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  color: var(--color-cyan);
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+}
+
+.section-description {
+  color: var(--color-text-secondary);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* ==============================
+   BUTTON SYSTEM
+================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 50px;
+  padding: 0 24px;
+
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: var(--transition);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+  box-shadow: 0 6px 24px rgba(40, 123, 255, 0.2);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(40, 123, 255, 0.3);
+}
+
+.btn-outline {
+  border-color: var(--color-border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--color-white);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-primary);
+  background: rgba(40, 123, 255, 0.08);
+}
+
+/* ==============================
+   SELECTION
+================================ */
+
+::selection {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* ==============================
+   SCROLLBAR
+================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #263750;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* ==============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+  .container {
+    width: min(100% - 32px, var(--container-width));
+  }
+
+  .section {
+    padding: 40px 0 60px;
+  }
+
+  html {
+    scroll-padding-top: 80px;
+  }
+
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+
+  #registration {
+    scroll-margin-top: 90px;
+  }
+}
+
+/* ==============================
+   REDUCED MOTION
+================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

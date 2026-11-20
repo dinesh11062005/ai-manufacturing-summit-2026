@@ -1,0 +1,248 @@
+/* =================================
+   ABOUT SECTION
+================================= */
+
+.about-section {
+  background: #f7faf8;
+  color: #202823;
+  overflow: hidden;
+}
+
+/* HEADER */
+
+.about-header {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: end;
+  gap: 60px;
+  margin-bottom: 65px;
+}
+
+.about-header .section-label {
+  color: #059669;
+}
+
+.about-header .section-title {
+  margin-top: 18px;
+  color: #17231d;
+}
+
+.about-header .section-title span {
+  display: block;
+  color: #059669;
+}
+
+.about-intro {
+  color: #64736a;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+/* =================================
+   MAIN CONTENT
+================================= */
+
+.about-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 75px;
+}
+
+/* AI MANUFACTURING IMAGE */
+
+.about-visual {
+  position: relative;
+  width: 100%;
+  height: 390px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #17231d;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.about-main-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.about-visual:hover .about-main-image {
+  transform: scale(1.04);
+}
+
+/* IMAGE CAPTION */
+
+.about-visual-caption {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* =================================
+   ABOUT TEXT
+================================= */
+
+.about-content h3 {
+  color: #17231d;
+  font-family: var(--heading-font);
+  font-size: clamp(25px, 3vw, 36px);
+  line-height: 1.3;
+  margin-bottom: 22px;
+}
+
+.about-content > p {
+  color: #64736a;
+  font-size: 14px;
+  line-height: 1.9;
+  margin-bottom: 15px;
+}
+
+/* =================================
+   STATS
+================================= */
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 35px;
+  padding-top: 25px;
+  border-top: 1px solid #dce6df;
+}
+
+.about-stats div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.about-stats strong {
+  color: #059669;
+  font-size: 27px;
+  font-weight: 800;
+}
+
+.about-stats span {
+  color: #718078;
+  font-size: 11px;
+}
+
+/* =================================
+   HIGHLIGHT CARDS
+================================= */
+
+.about-highlights {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 80px;
+}
+
+.about-card {
+  padding: 28px 22px;
+  background: #ffffff;
+  border: 1px solid #e5eee8;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-6px);
+  border-color: #10b981;
+  box-shadow: 0 12px 30px rgba(16, 185, 129, 0.08);
+}
+
+.about-card-icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #059669;
+  background: #d1fae5;
+  border-radius: 9px;
+  margin-bottom: 22px;
+}
+
+.about-card h4 {
+  color: #17231d;
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+
+.about-card p {
+  color: #718078;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+/* =================================
+   RESPONSIVE DESIGN
+================================= */
+
+@media (max-width: 1000px) {
+  .about-main {
+    gap: 40px;
+  }
+
+  .about-highlights {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .about-header {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .about-main {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .about-visual {
+    height: 330px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .about-stats {
+    gap: 8px;
+  }
+
+  .about-stats strong {
+    font-size: 23px;
+  }
+
+  .about-stats span {
+    font-size: 10px;
+  }
+
+  .about-visual {
+    height: 250px;
+  }
+
+  .about-visual-caption {
+    left: 15px;
+    bottom: 15px;
+    font-size: 8px;
+  }
+}
