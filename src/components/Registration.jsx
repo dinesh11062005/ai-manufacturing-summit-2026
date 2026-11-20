@@ -12,10 +12,12 @@ import {
 function Registration() {
 
   // Handle registration form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     const form = e.currentTarget;
 
-    // Additional validation before submission
+    // Additional validation
     const fullName = form.elements.fullName.value.trim();
     const phone = form.elements.phone.value.trim();
     const organization = form.elements.organization.value.trim();
@@ -24,43 +26,66 @@ function Registration() {
     const phonePattern = /^[6-9][0-9]{9}$/;
     const organizationPattern = /^[A-Za-z][A-Za-z &.,'()-]*$/;
 
+    // Validate full name
     if (fullName.length < 3 || !namePattern.test(fullName)) {
-      e.preventDefault();
       alert("Please enter a valid full name.");
       form.elements.fullName.focus();
       return;
     }
 
+    // Validate phone number
     if (!phonePattern.test(phone)) {
-      e.preventDefault();
-      alert("Please enter a valid 10-digit mobile number starting with 6, 7, 8 or 9.");
+      alert(
+        "Please enter a valid 10-digit mobile number starting with 6, 7, 8 or 9."
+      );
       form.elements.phone.focus();
       return;
     }
 
+    // Validate college/company
     if (
       organization.length < 2 ||
       !organizationPattern.test(organization)
     ) {
-      e.preventDefault();
-      alert("Please enter a valid college or company name without numbers.");
+      alert(
+        "Please enter a valid college or company name without numbers."
+      );
       form.elements.organization.focus();
       return;
     }
 
-    // Local development: Navigate to Thank You page
-    if (import.meta.env.DEV) {
-      e.preventDefault();
+    // Submit registration data to Netlify
+    try {
+      const formData = new FormData(form);
 
+      const response = await fetch("/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams(formData).toString()
+      });
+
+      if (!response.ok) {
+        throw new Error("Registration submission failed.");
+      }
+
+      // Navigate to our custom React Thank You page
       window.history.pushState({}, "", "/thank-you/");
 
       window.dispatchEvent(
         new PopStateEvent("popstate")
       );
-    }
 
-    // Production: Netlify handles the actual form submission
+    } catch (error) {
+      console.error("Registration Error:", error);
+
+      alert(
+        "Registration failed. Please try again."
+      );
+    }
   };
+
 
   // Allow only valid name characters
   const handleNameInput = (e) => {
@@ -70,13 +95,14 @@ function Registration() {
     );
   };
 
+
   // Allow only digits in phone number
   const handlePhoneInput = (e) => {
-    e.target.value = e.target.value.replace(
-      /[^0-9]/g,
-      ""
-    ).slice(0, 10);
+    e.target.value = e.target.value
+      .replace(/[^0-9]/g, "")
+      .slice(0, 10);
   };
+
 
   // Allow valid college/company characters without numbers
   const handleOrganizationInput = (e) => {
@@ -86,13 +112,15 @@ function Registration() {
     );
   };
 
-  return (
-    <section className="registration-section section" id="registration">
 
+  return (
+    <section
+      className="registration-section section"
+      id="registration"
+    >
       <div className="container">
 
         {/* HEADER */}
-
         <div className="registration-header">
 
           <span className="section-label">
@@ -111,10 +139,10 @@ function Registration() {
 
         </div>
 
+
         <div className="registration-layout">
 
           {/* LEFT INFORMATION */}
-
           <div className="registration-info">
 
             <h3>
@@ -127,10 +155,10 @@ function Registration() {
               is transforming modern manufacturing.
             </p>
 
+
             <div className="registration-details">
 
               {/* DATE AND TIME */}
-
               <div className="registration-detail-item">
 
                 <div className="registration-detail-icon">
@@ -139,14 +167,16 @@ function Registration() {
 
                 <div>
                   <span>DATE & TIME</span>
+
                   <strong>5 December 2026</strong>
+
                   <p>10:00 AM – 12:00 PM IST</p>
                 </div>
 
               </div>
 
-              {/* EVENT FORMAT */}
 
+              {/* EVENT FORMAT */}
               <div className="registration-detail-item">
 
                 <div className="registration-detail-icon">
@@ -155,7 +185,9 @@ function Registration() {
 
                 <div>
                   <span>EVENT FORMAT</span>
+
                   <strong>Live Online Webinar</strong>
+
                   <p>Attend from anywhere</p>
                 </div>
 
@@ -163,44 +195,54 @@ function Registration() {
 
             </div>
 
-            {/* FREE BADGE */}
 
+            {/* FREE BADGE */}
             <div className="registration-free-badge">
+
               <span>FREE</span>
-              <p>Registration is completely free.</p>
+
+              <p>
+                Registration is completely free.
+              </p>
+
             </div>
 
           </div>
 
-          {/* REGISTRATION FORM */}
 
+          {/* REGISTRATION FORM */}
           <div className="registration-form-wrapper">
 
             <div className="form-heading">
+
               <h3>Register for the Summit</h3>
-              <p>Fill in your details to reserve your seat.</p>
+
+              <p>
+                Fill in your details to reserve your seat.
+              </p>
+
             </div>
+
 
             <form
               className="registration-form"
               name="summit-registration"
               method="POST"
-              action="/thank-you"
+              action="/"
               data-netlify="true"
               data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
             >
 
               {/* NETLIFY FORM IDENTIFICATION */}
-
               <input
                 type="hidden"
                 name="form-name"
                 value="summit-registration"
               />
 
-              {/* HONEYPOT SPAM PROTECTION */}
 
+              {/* HONEYPOT SPAM PROTECTION */}
               <div hidden>
                 <label>
                   Don't fill this out:
@@ -208,8 +250,8 @@ function Registration() {
                 </label>
               </div>
 
-              {/* FULL NAME */}
 
+              {/* FULL NAME */}
               <div className="form-group">
 
                 <label htmlFor="fullName">
@@ -238,8 +280,8 @@ function Registration() {
 
               </div>
 
-              {/* EMAIL */}
 
+              {/* EMAIL */}
               <div className="form-group">
 
                 <label htmlFor="email">
@@ -264,8 +306,8 @@ function Registration() {
 
               </div>
 
-              {/* PHONE */}
 
+              {/* PHONE */}
               <div className="form-group">
 
                 <label htmlFor="phone">
@@ -294,8 +336,8 @@ function Registration() {
 
               </div>
 
-              {/* OCCUPATION */}
 
+              {/* OCCUPATION */}
               <div className="form-group">
 
                 <label htmlFor="occupation">
@@ -347,8 +389,8 @@ function Registration() {
 
               </div>
 
-              {/* COLLEGE / COMPANY */}
 
+              {/* COLLEGE / COMPANY */}
               <div className="form-group">
 
                 <label htmlFor="organization">
@@ -377,8 +419,8 @@ function Registration() {
 
               </div>
 
-              {/* CONSENT */}
 
+              {/* CONSENT */}
               <div className="form-consent">
 
                 <input
@@ -396,15 +438,19 @@ function Registration() {
 
               </div>
 
-              {/* SUBMIT BUTTON */}
 
+              {/* SUBMIT BUTTON */}
               <button
                 type="submit"
                 className="registration-submit"
               >
+
                 Register Now
+
                 <ArrowUpRight size={19} />
+
               </button>
+
 
               <p className="form-note">
                 Your information will be used for event registration.
